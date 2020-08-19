@@ -16,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
     this.activateRoute.params.subscribe((params) => {
       if (this.productService.getItem('products')) {
         const productsList = [...this.productService.getItem('products')];
-        this.productDetail = productsList.find((el, i) => { console.log(i, params.id); return i === parseInt(params.id, 10); });
+        this.productDetail = productsList.find((el, i) =>  i === parseInt(params.id, 10));
       }
     });
   }
