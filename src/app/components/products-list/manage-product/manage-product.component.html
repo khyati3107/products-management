@@ -1,0 +1,58 @@
+<form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <div class="modal-header">
+        <h4 class="modal-title">Manage Product</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="title">Enter title</label>
+            <input type="text" id="title" formControlName="title" class="form-control">
+            <ng-container *ngIf="f['title'].errors && f['title'].touched">
+                <small *ngIf="f['title'].errors.required" class="form-text error-msg">{{manageProductFormErrors.TITLE_REQUIRED}}</small>
+                <small *ngIf="f['title'].errors.maxlength" class="form-text error-msg">{{manageProductFormErrors.TITLE_MAX_LENGTH}}</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="desc">Enter Description</label>
+            <textarea class="form-control" id="desc" formControlName="desc" rows="5"></textarea>
+            <ng-container *ngIf="f['desc'].errors && f['desc'].touched">
+                <small *ngIf="f['desc'].errors.required" class="form-text error-msg">{{manageProductFormErrors.DESCRIPTION_REQUIRED}}</small>
+                <small *ngIf="f['desc'].errors.minlength" class="form-text error-msg">{{manageProductFormErrors.DESCRIPTION_MIN_LENGTH}}</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">Enter image URL </label>
+            <input type="text" id="imageUrl" class="form-control" formControlName="imageUrl">
+            <ng-container *ngIf="f['imageUrl'].errors && f['imageUrl'].touched">
+                <small *ngIf="f['imageUrl'].errors.required" class="form-text error-msg">{{manageProductFormErrors.IMAGE_URL_REQUIRED}}</small>
+                <small *ngIf="f['imageUrl'].errors.pattern" class="form-text error-msg">{{manageProductFormErrors.IMAGE_URL_VALID}}</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="priceRange">Select price range</label>
+            <select class="form-control" id="priceRange" formControlName="priceRange">
+                <option *ngFor="let priceRangeVal of priceRangeList; let i = index" [value]="priceRangeVal">{{priceRangeVal}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rating">Give Rating</label>
+            <select class="form-control" id="rating" formControlName="rating">
+                <option *ngFor="let ratingVal of ratingList; let i = index" [value]="ratingVal">{{ratingVal}}</option>
+            </select>
+        </div>
+        <div class="form-group form-check" *ngFor="let loc of locations; let i = index" formArrayName="locationList">
+            <input type="checkbox" [formControlName]="i" class="form-check-input" id="loc-{{i}}">
+            <label class="form-check-label" for="loc-{{i}}">{{loc}}</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" *ngFor="let stock of stockTypes; let i = index">
+            <input type="radio" id="stock-{{i}}" formControlName="inOutStock" [value]="stock.value" class="custom-control-input">
+            <label class="custom-control-label" for="stock-{{i}}">{{stock.label}}</label>
+          </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" [disabled]="productForm.invalid" ngbAutofocus class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
+    </div>
+</form>

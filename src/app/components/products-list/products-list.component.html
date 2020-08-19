@@ -1,0 +1,39 @@
+<div class="container-fluid items-wrapper">
+    <div class="checkboxes">
+        <h5>Filter Price Range</h5>
+        <div class="form-group form-check" *ngFor="let priceRange of priceRangeList; let i = index">
+            <input type="checkbox" class="form-check-input" name="price" [checked]="priceRange.isSelected"
+                (change)="filterByPrice(priceRange)" id="price-range-{{i}}">
+            <label class="form-check-label" for="price-range-{{i}}">{{priceRange.name}}</label>
+        </div>
+    </div>
+    <div class="main-wrapper">
+        <div class="card-columns" *ngIf="productsList && productsList.length;">
+            <div class="card" *ngFor="let product of productsList | filter:searchText:priceRange; let i=index">
+                <img class="card-img-top" [src]="product?.imageUrl" [routerLink]="'/products-list/'+i"
+                    alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title">{{product?.title}}</h2>
+                    <p class="card-text">{{product?.desc}}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-default" (click)="editProduct(product,i)"> <i
+                            class="fa fa-edit"></i></button>
+                    <button class="btn btn-default" (click)="likeDislikeProduct(i)"> <i class="fa"
+                            [ngClass]="product?.favourite?'fa-heart':'fa-heart-o'"></i></button>
+                    <button class="btn btn-default" (click)="deleteProduct(i)"> <i class="fa fa-trash"></i></button>
+                </div>
+                <div *ngIf="(product | filter:searchText:priceRange).length === 0"> No matches found </div>
+            </div>
+            
+        </div>
+        <div *ngIf="(productsList | filter:searchText:priceRange).length === 0">
+            <div><img src="./assets/images/no-data.png" class="center"></div>
+            
+        </div>
+        <a class="float" (click)="addProduct()">
+            <i class="fa fa-plus my-float"></i>
+        </a>
+    </div>
+
+</div>

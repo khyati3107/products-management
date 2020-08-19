@@ -1,0 +1,51 @@
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#0C9;
+	color:#FFF;
+	cursor: pointer;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+.items-wrapper{
+	padding: 0;
+}
+.my-float{
+	margin-top:22px;
+}
+.checkboxes{
+	width: 20%;
+	float: left;
+	height: calc(100vh - 56px);
+	background-color: #ccc;
+}
+.main-wrapper{
+	float: right;
+	width: 80%;
+}
+.card-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* number of lines to show */
+	-webkit-box-orient: vertical;
+ }
+
+ .card-img-top {
+    width: 100%;
+    height: 15vw;
+	object-fit: cover;
+	cursor: pointer;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
